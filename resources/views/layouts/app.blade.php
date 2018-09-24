@@ -32,14 +32,35 @@
 <div id="app" style="height: 100%;">
     @auth
         <div class="ui top attached segment">
-            <div class="ui massive top menu">
-                <div class="items">
+            <div class="ui tiny top menu">
+                <a class="labeled launch icon item no-padding" id="menu">
+                    <img src="{{ asset('imagenes/hamburguesa_menu.png') }}" style="height: 56.5px; width: 50px;">
+                </a>
+                &nbsp;
+                <div class="item" style="background-color: black;">
+                    <img class="icon" src="{{asset('imagenes/ucsg.png')}}" style="width: 300%; height: 100%;">
+                </div>
 
+                <div class="right menu">
+                    <div class="item">
+                        <img class="ui mini circular image no-padding" src="{{ asset('imagenes/default-user.png') }}">
+                        &nbsp;
+                        <div class="content no-padding">
+                            <div class="ui sub header">{{ Auth::user()->name }}</div>
+                            Estudiante
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="ui center attached segment" id="contenido" style="height: 100%;">
-            <div class="ui visible sidebar inverted vertical menu">
+            <div class="ui sidebar inverted vertical menu">
+                <div class="ui segment" style="background-image: url('{{ asset('imagenes/fondo_user.jpg') }}'); background-size: cover;">
+                    <h2 class="ui center aligned icon header no-padding">
+                        <img src="{{ asset('imagenes/default-user.png') }}" style="width: 40%; height: 40%; margin: 0;">
+                    </h2>
+                    <h5 class="ui center aligned header">Bienvenido {{ Auth::getUser()->name }}</h5>
+                </div>
                 <a class="item">
                     Opcion1
                 </a>
@@ -64,8 +85,10 @@
 </body>
 </html>
 
+@yield('js')
 <script type="application/javascript">
     $('#contenido .ui.sidebar')
         .sidebar({context: $('#contenido')})
-    @yield('js')
+        .sidebar('attach events', '#menu');
 </script>
+</div>
