@@ -5,7 +5,7 @@
         <div class="ui equal width center aligned padded grid stackable">
             <div class="row">
                 <div class="six wide column">
-                    <div class="ui segments">
+                    <div class="ui raised segments">
                         <div class="ui segment inverted nightli">
                             <h3 class="ui header">
                                 Ingresar a su Agenda Virtual

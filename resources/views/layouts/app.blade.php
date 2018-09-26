@@ -42,12 +42,18 @@
                 </div>
 
                 <div class="right menu">
-                    <div class="item">
-                        <img class="ui mini circular image no-padding" src="{{ asset('imagenes/default-user.png') }}">
-                        &nbsp;
-                        <div class="content no-padding">
-                            <div class="ui sub header">{{ Auth::user()->name }}</div>
-                            Estudiante
+                    <div class="ui dropdown item">
+                        <img class="ui mini circular image no-padding"
+                             src="{{ asset('imagenes/default-user.png') }}">
+                        {{ Auth::user()->name }}<br>
+                        Estudiante
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a class="item" href="#" onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">Cerrar Sesion</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -55,7 +61,8 @@
         </div>
         <div class="ui center attached segment" id="contenido" style="height: 100%;">
             <div class="ui sidebar inverted vertical menu">
-                <div class="ui segment" style="background-image: url('{{ asset('imagenes/fondo_user.jpg') }}'); background-size: cover;">
+                <div class="ui segment"
+                     style="background-image: url('{{ asset('imagenes/fondo_user.jpg') }}'); background-size: cover;">
                     <h2 class="ui center aligned icon header no-padding">
                         <img src="{{ asset('imagenes/default-user.png') }}" style="width: 40%; height: 40%; margin: 0;">
                     </h2>
@@ -90,5 +97,7 @@
     $('#contenido .ui.sidebar')
         .sidebar({context: $('#contenido')})
         .sidebar('attach events', '#menu');
+
+    $('.ui.dropdown').dropdown({useLabels: false});
 </script>
 </div>
