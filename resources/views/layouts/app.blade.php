@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'AUV') }}</title>
+    <title>{{ config('app.name') }}</title>
 
     <!-- Scripts -->
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
@@ -25,41 +25,50 @@
     {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
     <link href="{{ asset('css/semantic.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('plugins/datepicker/css/bootstrap-datepicker3.css') }}" rel="stylesheet">
     @yield('css')
 
 </head>
 <body class="signin">
-<div id="app" style="height: 100%;">
-    @auth
-        <div class="ui top attached segment">
-            <div class="ui tiny top menu">
-                <a class="labeled launch icon item no-padding" id="menu">
-                    <img src="{{ asset('imagenes/hamburguesa_menu.png') }}" style="height: 56.5px; width: 50px;">
-                </a>
-                &nbsp;
-                <div class="item" style="background-color: black;">
-                    <img class="icon" src="{{asset('imagenes/ucsg.png')}}" style="width: 300%; height: 100%;">
-                </div>
+@auth
+    <div class="ui top attached no-padding">
+        <div class="ui tiny top menu no-padding" style="background-color: #98092a;">
+            <a class="labeled launch icon item" style="background-color: #98092a; color: white;" id="menu" data-content="Menu">
+                <i class="circular inverted sidebar large icon"></i>
+                Menu
+            </a>
+            &nbsp;
+            <div class="item" style="background-color: black; width: 140px;">
+                <img src="{{asset('imagenes/ucsg.png')}}" style="width: 100px;">
+            </div>
 
-                <div class="right menu">
-                    <div class="ui dropdown item">
-                        <img class="ui mini circular image no-padding"
-                             src="{{ asset('imagenes/default-user.png') }}">
-                        {{ Auth::user()->name }}<br>
-                        Estudiante
-                        <i class="dropdown icon"></i>
-                        <div class="menu">
-                            <a class="item" href="#" onclick="event.preventDefault();
+            <div class="right menu" style="border-left-color: black; border-left-style: groove;">
+                <div class="item">
+                    <div class="ui dropdown">
+                        <i class="inbox circular inverted icon"></i>23
+                    </div>
+                </div>
+                <div class="ui dropdown item" style="color: white;">
+                    <img class="ui mini circular image no-padding"
+                         src="{{ asset('imagenes/default-user.png') }}">
+                    {{ Auth::user()->name }}<br>
+                    Estudiante
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="item" href="#" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">Cerrar Sesion</a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </div>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="ui center attached segment" id="contenido" style="height: 100%;">
+    </div>
+@endauth
+<div id="app">
+    @auth
+        <div class="ui center attached segment" id="contenido">
             <div class="ui sidebar inverted vertical menu">
                 <div class="ui segment"
                      style="background-image: url('{{ asset('imagenes/fondo_user.jpg') }}'); background-size: cover;">
@@ -78,13 +87,13 @@
                     Opcion3
                 </a>
             </div>
-            <div class="pusher">
+            <div class="pusher" style="height: 100vh; overflow-y: auto;">
                 @yield('content')
             </div>
         </div>
     @endauth
     @guest
-        <div class="pusher">
+        <div class="pusher" style="height: 100vh; overflow-y: auto;">
             @yield('content')
         </div>
     @endguest
@@ -93,11 +102,16 @@
 </html>
 
 @yield('js')
-<script type="application/javascript">
-    $('#contenido .ui.sidebar')
-        .sidebar({context: $('#contenido')})
-        .sidebar('attach events', '#menu');
+<script src="{{ asset('plugins/datepicker/js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#contenido .ui.sidebar')
+            .sidebar({context: $('#contenido')})
+            .sidebar('attach events', '#menu');
 
-    $('.ui.dropdown').dropdown({useLabels: false});
+        $('.ui.dropdown').dropdown({useLabels: false});
+        var today = new Date();
+
+        $('#calendar').datepicker("update", today);
+    });
 </script>
-</div>
