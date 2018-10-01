@@ -10,6 +10,7 @@
         <!-- Fonts -->
 
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
+        <link href="{{ asset('css/semantic.min.css') }}" rel="stylesheet">
 
         <!-- Styles -->
         <style>
@@ -103,19 +104,15 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            <div class="content">
-                <div class="title m-b-md">
-                    <img src="{{ asset('imagenes/logo_ucsg.png') }}" class="logo">
+            <div class="container">
+                <div class="ui huge header">
+                    <div class="">
+                        <img src="{{ asset('imagenes/logo_ucsg.png') }}" class="ui small image logo">
+                    </div>
+                        Universidad Católica Santiago de Guayaquil
+                    <hr>
+                        Agenda Universitaria
                 </div>
-
-                <div class="title m-b-md">
-                    Universidad Católica Santiago de Guayaquil
-                </div>
-                <hr>
-                <div class="title m-b-md">
-                    Agenda Universitaria
-                </div>
-
                 <div class="links">
                     <div class="opcion">
                         <a href="https://laravel.com/docs">Servicios en linea</a>
