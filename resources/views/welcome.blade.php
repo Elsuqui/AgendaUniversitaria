@@ -132,7 +132,7 @@
                                 <a href="{{ url('/home') }}">Bienvenido <br> {{ Auth::getUser()->name }}</a>
                                 <img src="{{ asset('imagenes/default-user.png') }}" width="50" height="50">
                             @else
-                                <a href="{{ route('login') }}">Ingresar a su Agenda</a>
+                                <a href="{{ route('reconocimiento_docente') }}">Ingresar a su Agenda</a>
                                 <img src="{{ asset('imagenes/login_button.png') }}" width="50" height="50">
                                 {{-- <a href="{{ route('register') }}">Register</a> --}}
                             @endauth

@@ -18,3 +18,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/detector', 'ReconocimientoDocenteController@index')->name('reconocimiento_docente');
+Route::get('/cargarArchivoCascada', 'ReconocimientoDocenteController@archivoCascada')->name('archivo_cascada');
