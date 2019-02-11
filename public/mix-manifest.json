@@ -3,7 +3,7 @@
     "/css/app.css": "/css/app.css",
     "/css/semantic.min.css": "/css/semantic.min.css",
     "/js/semantic.min.js": "/js/semantic.min.js",
-    "/js/opencv.js": "/js/opencv.js",
     "/js/utils.js": "/js/utils.js",
-    "/js/stats.min.js": "/js/stats.min.js"
+    "/js/stats.min.js": "/js/stats.min.js",
+    "/plugins/fullcalendar/moment.min.js": "/plugins/fullcalendar/moment.min.js"
 }

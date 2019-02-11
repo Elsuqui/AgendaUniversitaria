@@ -12,7 +12,6 @@
     <!-- Scripts -->
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-    <script src="{{ asset('js/semantic.min.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -26,10 +25,12 @@
     <link href="{{ asset('css/semantic.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('plugins/datepicker/css/bootstrap-datepicker3.css') }}" rel="stylesheet">
+    <link href="{{ asset('plugins/semantic-ui-calendar/dist/calendar.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('dist/components/popup.min.css') }}" rel="stylesheet">
     @yield('css')
 
 </head>
-<body class="signin">
+<body class="{{ auth()->check() ? '' : 'signin'}}">
 @auth
     <div class="ui top attached no-padding">
         <div class="ui tiny top menu no-padding" style="background-color: #98092a;">
@@ -87,7 +88,7 @@
                     Opcion3
                 </a>
             </div>
-            <div class="pusher" style="height: 100vh; overflow-y: auto;">
+            <div class="pusher">
                 @yield('content')
             </div>
         </div>
@@ -101,8 +102,11 @@
 </body>
 </html>
 
+{{--<script src="{{ asset("plugins/fullcalendar/lib/moment.min.js") }}" type="text/javascript"></script>--}}
+<script src="{{ asset('js/semantic.min.js') }}"></script>
+<script src="{{ asset('dist/components/popup.min.js') }}"></script>
+<script src="{{ asset("js/app.js") }}"></script>
 @yield('js')
-<script src="{{ asset('plugins/datepicker/js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('#contenido .ui.sidebar')
@@ -111,7 +115,5 @@
 
         $('.ui.dropdown').dropdown({useLabels: false});
         var today = new Date();
-
-        $('#calendar').datepicker("update", today);
     });
 </script>

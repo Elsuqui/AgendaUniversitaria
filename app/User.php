@@ -2,15 +2,44 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Storage;
+use League\Flysystem\FileNotFoundException;
 
 /**
  * App\User
  *
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @mixin \Eloquent
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string|null $avatar
+ * @property string|null $email_verified_at
+ * @property int $request
+ * @property string|null $validatorKey
+ * @property string $password
+ * @property string|null $remember_token
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\MateriaDocente[] $materias_docente
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereAvatar($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEmailVerifiedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRequest($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereValidatorKey($value)
  */
 class User extends Authenticatable
 {
@@ -33,4 +62,29 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Obtiene la Ruta de Imagen avatar del usuario
+     *
+     * @return string
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     */
+    function getAvatarImagePath(){
+        try {
+            //$imagen = base64_encode(Storage::get('public/avatars/' . $this->id . '/' . $this->avatar));
+            $imagen = Storage::get('public/avatars/' . $this->id . '/' . $this->avatar);
+        } catch (FileNotFoundException $e) {
+            $imagen = "";
+        }
+
+        return $imagen;
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function materias_docente() : HasMany
+    {
+        return $this->hasMany(MateriaDocente::class, "id_usuario");
+    }
 }
