@@ -505,6 +505,7 @@
                 console.log(send_object);
                 $.ajax({
                     url: "http://127.0.0.1:5000/register",
+                    //url: "https://0bd89f48.ngrok.io/register"
                     type: "POST",
                     contentType: "application/json;charset=utf-8",
                     datatype: "json",

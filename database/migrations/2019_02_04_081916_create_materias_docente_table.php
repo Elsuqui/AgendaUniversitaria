@@ -18,7 +18,7 @@ class CreateMateriasDocenteTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('id_materia');
             $table->unsignedInteger('id_usuario');
-            $table->enum('estado', ["ACTIVO", "INACTIVO"]);
+            $table->enum('estado', ["ACTIVO", "INACTIVO"])->default("ACTIVO");
             $table->unsignedInteger('id_usuario_creacion');
             $table->unsignedInteger('id_usuario_edicion')->nullable();
             $table->timestamps();

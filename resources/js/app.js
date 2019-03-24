@@ -6,12 +6,23 @@
  */
 import Vue from 'vue';
 import Vuex from 'vuex'
+import PortalVue from 'portal-vue';
+import VueSweetalert2 from 'vue-sweetalert2';
+import evento from "./store/evento";
 
 require('./bootstrap');
 
 window.Vue = require('vue');
 
 Vue.use(Vuex);
+Vue.use(PortalVue);
+Vue.use(VueSweetalert2);
+
+
+const store = new Vuex.Store({
+    evento
+});
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -22,8 +33,11 @@ Vue.use(Vuex);
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component("calendar", require("./components/Calendar.vue"));
 Vue.component("listado-eventos", require("./components/ListadoEventos"));
-
+Vue.component("asignacion-materias", require("./components/AsignacionMaterias"));
+Vue.component("notificaciones-pendientes", require("./components/NotificacionesPendientes"));
+Vue.component("reprogramar-eventos", require("./components/ReprogramarEventos"));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    store
 });

@@ -3,8 +3,11 @@
 namespace App;
 
 use Carbon\Carbon;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * App\Evento
@@ -40,6 +43,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Evento whereTitulo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Evento whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $hora_fin
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Evento whereHoraFin($value)
+ * @property string|null $estado_control
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Evento whereEstadoControl($value)
  */
 class Evento extends Model
 {
@@ -53,6 +60,7 @@ class Evento extends Model
         "aula",
         "fecha",
         "hora",
+        "hora_fin",
         "estado",
         "importancia",
         "id_usuario_creacion"
@@ -63,7 +71,7 @@ class Evento extends Model
     ];
 
     protected $casts = [
-        'fecha' => 'date:Y-m-d',
+        'fecha' => 'date:Y-m-d'
     ];
 
     /**

@@ -21,8 +21,11 @@ class CreateEventosTable extends Migration
             $table->string('descripcion')->nullable();
             $table->string('aula');
             $table->date('fecha');
+            $table->date('fecha_fin');
             $table->time('hora');
-            $table->enum('estado', ["ACTIVO", "INACTIVO"]);
+            $table->time('hora_fin');
+            $table->string('estado_control')->default("PENDIENTE");
+            $table->enum('estado', ["ACTIVO", "INACTIVO"])->default("ACTIVO");
             $table->unsignedInteger('importancia');
             $table->unsignedInteger('id_usuario_creacion');
             $table->unsignedInteger('id_usuario_edicion')->nullable();

@@ -9,9 +9,12 @@
         "barryvdh/laravel-ide-helper": "^2.5",
         "doctrine/dbal": "~2.3",
         "fideloper/proxy": "^4.0",
+        "jenssegers/date": "^3.5",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
-        "laravelcollective/html": "^5.4.0"
+        "laravelcollective/html": "^5.4.0",
+        "pusher/pusher-php-server": "~3.0",
+        "ext-json": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",

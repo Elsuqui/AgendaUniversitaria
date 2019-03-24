@@ -18,7 +18,8 @@ class ReconocimientoDocenteController extends Controller
 
     //Metodo para cargar archivo cascada
     public function archivoCascada(){
-        return response(file_get_contents(Storage::path('public/modelos_deteccion/haarcascade_frontalface_default.xml')), 200, [
+        $contenido = file_get_contents(Storage::path('public/modelos_deteccion/haarcascade_frontalface_default.xml'));
+        return response($contenido, 200, [
             'Content-Type' => 'application/xml'
         ]);
     }

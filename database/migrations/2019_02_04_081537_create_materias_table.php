@@ -17,7 +17,7 @@ class CreateMateriasTable extends Migration
             $table->engine = "InnoDB";
             $table->increments('id');
             $table->string('nombre');
-            $table->enum('estado', ["ACTIVO", "INACTIVO"]);
+            $table->enum('estado', ["ACTIVO", "INACTIVO"])->default("ACTIVO");
             $table->unsignedInteger('id_usuario_creacion');
             $table->unsignedInteger('id_usuario_edicion')->nullable();
             $table->timestamps();

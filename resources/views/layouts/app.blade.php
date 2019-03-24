@@ -27,6 +27,7 @@
     <link href="{{ asset('plugins/datepicker/css/bootstrap-datepicker3.css') }}" rel="stylesheet">
     <link href="{{ asset('plugins/semantic-ui-calendar/dist/calendar.min.css') }}" rel="stylesheet">
     <link href="{{ asset('dist/components/popup.min.css') }}" rel="stylesheet">
+
     @yield('css')
 
 </head>
@@ -34,26 +35,28 @@
 @auth
     <div class="ui top attached no-padding">
         <div class="ui tiny top menu no-padding" style="background-color: #98092a;">
-            <a class="labeled launch icon item" style="background-color: #98092a; color: white;" id="menu" data-content="Menu">
+            <a class="labeled launch icon item" style="background-color: #98092a; color: white;" id="menu"
+               data-content="Menu">
                 <i class="circular inverted sidebar large icon"></i>
                 Menu
             </a>
             &nbsp;
             <div class="item" style="background-color: black; width: 140px;">
-                <img src="{{asset('imagenes/ucsg.png')}}" style="width: 100px;">
+                <a href="{{ route("home") }}"><img src="{{asset('imagenes/ucsg.png')}}" style="width: 100px;"></a>
             </div>
 
             <div class="right menu" style="border-left-color: black; border-left-style: groove;">
-                <div class="item">
+                <div id="menu_notificacion" class="ui compact menu" style="max-height: 50%; position: relative; align-self: center; width: 150px;"></div>
+                {{--<div class="item">
                     <div class="ui dropdown">
                         <i class="inbox circular inverted icon"></i>23
                     </div>
-                </div>
+                </div>--}}
                 <div class="ui dropdown item" style="color: white;">
                     <img class="ui mini circular image no-padding"
                          src="{{ asset('imagenes/default-user.png') }}">
                     {{ Auth::user()->name }}<br>
-                    Estudiante
+                    DOCENTE
                     <i class="dropdown icon"></i>
                     <div class="menu">
                         <a class="item" href="#" onclick="event.preventDefault();
@@ -69,6 +72,7 @@
 @endauth
 <div id="app">
     @auth
+        <notificaciones-pendientes :usuario={{ Auth::user()->id }}></notificaciones-pendientes>
         <div class="ui center attached segment" id="contenido">
             <div class="ui sidebar inverted vertical menu">
                 <div class="ui segment"
@@ -78,15 +82,18 @@
                     </h2>
                     <h5 class="ui center aligned header">Bienvenido {{ Auth::getUser()->name }}</h5>
                 </div>
-                <a class="item">
-                    Opcion1
-                </a>
-                <a class="item">
-                    Opcion2
-                </a>
-                <a class="item">
-                    Opcion3
-                </a>
+                @if(Auth::user()->id = 1)
+                    <a class="item" href="{{ route("materias.index") }}">
+                        Catálogo de Materias
+                    </a>
+                    <a class="item" href="{{ route("asignacion") }}">
+                        Asignacion de Materias
+                    </a>
+                @else
+                    <a class="item">
+                        Materias Asignadas
+                    </a>
+                @endif
             </div>
             <div class="pusher">
                 @yield('content')
@@ -108,7 +115,7 @@
 <script src="{{ asset("js/app.js") }}"></script>
 @yield('js')
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#contenido .ui.sidebar')
             .sidebar({context: $('#contenido')})
             .sidebar('attach events', '#menu');

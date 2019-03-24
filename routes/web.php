@@ -26,6 +26,17 @@ Route::group(["middleware" => ["auth"]], function() {
     Route::delete('/eventos/eliminar/{id}', 'EventosController@eliminarEvento')->name('eventos.eliminar');
     Route::get('/eventos/listado', 'EventosController@eventos')->name('eventos.list');
     Route::get('/eventos/ver/{id}', 'EventosController@ver')->name('eventos.show');
+    Route::get('/materias/asignaciones', 'MateriaController@asignacionIndex')->name('asignacion');
+    Route::get("/materias/docentes", "MateriaController@listadoDocentes")->name('listado.docente');
+    Route::get("/materias/asignadas", "MateriaController@materiasAsignadas")->name("materias.asignadas");
+    Route::resource('materias', 'MateriaController');
+    Route::get("/probar/{id}", "EventosController@probarNotificacionEvento");
+    Route::get("/notificaciones", "EventosController@obtenerNotificaciones");
+    Route::get("/marcar/notificacion/{id}", "EventosController@lecturaNotificacionTarea");
+    Route::get("/probar/notificacion/{id}", "EventosController@probarBusquedaNotifiacion");
+    Route::get("/confirmar/evento/{id}", "EventosController@confirmarEvento")->name("confirmar.evento");
+    Route::get("/reprogramar/evento/{id}", "EventosController@reprogramarEvento")->name("reprogramar.evento");
+    Route::post('/reprogramar/evento/nueva/actividad', 'EventosController@realizarReprogramacion')->name("realizar.reprogramacion");
 });
 
 

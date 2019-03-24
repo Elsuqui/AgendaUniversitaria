@@ -1,5 +1,47 @@
 const state = {
-    creado: false
+    creado: false,
+    actividades: [
+        {
+            nombre: "Lección",
+            materia: "Algebra Lineal",
+            descripcion: "Lección acerca de matrices y transformaciones",
+            fecha: "2019-09-02",
+            hora: "12:30",
+            aula: "101"
+        },
+        {
+            nombre: "Deber",
+            materia: "Investigacion de Operaciones",
+            descripcion: "Ejercicios resolución de ecuaciones método simplex",
+            fecha: "2019-09-02",
+            hora: "18:30",
+            aula: "120"
+        },
+        {
+            nombre: "Deber",
+            materia: "Investigacion de Operaciones",
+            descripcion: "Ejercicios resolución de ecuaciones método simplex",
+            fecha: "2019-09-02",
+            hora: "18:30",
+            aula: "120"
+        },
+        {
+            nombre: "Deber",
+            materia: "Investigacion de Operaciones",
+            descripcion: "Ejercicios resolución de ecuaciones método simplex",
+            fecha: "2019-09-02",
+            hora: "18:30",
+            aula: "120"
+        },
+        {
+            nombre: "Deber",
+            materia: "Investigacion de Operaciones",
+            descripcion: "Ejercicios resolución de ecuaciones método simplex",
+            fecha: "2019-09-02",
+            hora: "18:30",
+            aula: "120"
+        }
+    ]
 };
 
 

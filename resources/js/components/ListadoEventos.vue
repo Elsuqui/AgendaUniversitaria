@@ -80,7 +80,7 @@
         },
 
         computed: {
-            /*...mapState("evento"),*/
+           /* ...mapState("actividades"),*/
 
         },
 

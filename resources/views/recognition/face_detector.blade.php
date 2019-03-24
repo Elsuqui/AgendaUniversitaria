@@ -10,6 +10,8 @@
             display: none;
         }
     </style>
+
+    <
 @endsection
 @section('content')
     <!-- Contenedor de Canvas donde se mostrara la camara -->
@@ -80,9 +82,9 @@
     </div>
 @endsection
 @section('js')
-    <script src="{{ @asset('js/opencv.js') }}" type="text/javascript"></script>
     <script src="{{ @asset('js/utils.js') }}" type="text/javascript"></script>
-    <script src="{{ @asset('js/stats.min.js') }}" type="text/javascript"></script>
+    <script src="{{ @asset('js/opencv.js') }}" type="text/javascript"></script>
+    {{--<script src="{{ @asset('js/stats.min.js') }}" type="text/javascript"></script>--}}
 
     <script type="text/javascript">
 
@@ -90,7 +92,7 @@
 
         let utils = new Utils('errorMessage'); //use utils class
 
-        let stats = null;
+        /*let stats = null;*/
 
         let videoWidth, videoHeight;
 
@@ -162,13 +164,14 @@
 
             //Se carga el clasificador de cascada
             utils.createFileFromUrl(nombre_archivo_cascada, ruta_archivo_cascada, () => {
-                // load pre-trained classifiers
+                // load pre-trained classifier
                 let cargado = faceClassifier.load(nombre_archivo_cascada); // in the callback, load the cascade from file
                 console.log(cargado);
+                /*initUI();*/
+                startCamera();
             });
 
-            initUI();
-            startCamera();
+           //var self = this;
 
             /*$("#pedirPermiso").on('click', function () {
                 startCamera();
@@ -246,11 +249,11 @@
             if (dstC4 != null && !dstC4.isDeleted()) dstC4.delete();
         }
 
-        function initUI() {
+        /*function initUI() {
             stats = new Stats();
             stats.showPanel(0);
             document.getElementById('contendor').appendChild(stats.dom);
-        }
+        }*/
 
 
         function processVideo() {
@@ -259,7 +262,7 @@
             }
             else {
                 let begin = Date.now();
-                stats.begin();
+               /* stats.begin();*/
                 canvasInputCtx.drawImage(video, 0, 0, videoWidth, videoHeight);
                 let imageData = canvasInputCtx.getImageData(0, 0, videoWidth, videoHeight);
                 srcMat.data.set(imageData.data);
@@ -309,7 +312,7 @@
 
                 faceMat.delete();
                 faceVect.delete();
-                stats.end();
+                /*stats.end();*/
 
                 let delay = 1000 / FPS - (Date.now() - begin);
                 setTimeout(processVideo, delay);
@@ -387,7 +390,10 @@
 
             console.log(send_object);
             $.ajax({
+                //url: "https://0bd89f48.ngrok.io/imagesprocess",
                 url: "http://127.0.0.1:5000/imagesprocess",
+                //url: "http://192.188.52.222:5000/imagesprocess",
+                //url: "https://192.168.0.108:5000/imagesprocess",
                 type: "POST",
                 contentType: "application/json;charset=utf-8",
                 datatype: "json",
@@ -409,7 +415,6 @@
                 },
             });
         }
-
     </script>
 
     {{--<script type="text/javascript">
